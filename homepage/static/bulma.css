@@ -364,7 +364,7 @@ body {
 a {
   color: #485fc7;
   cursor: pointer;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 a strong {
@@ -2370,7 +2370,8 @@ div.icon-text {
 
 .notification a:not(.button):not(.dropdown-item) {
   color: currentColor;
-  text-decoration: underline;
+  text-decoration: none;
+  /* modified by @yaleman */
 }
 
 .notification strong {

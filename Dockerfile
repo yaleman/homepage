@@ -31,7 +31,7 @@ USER homepage
 
 RUN python -m pip install --upgrade --no-warn-script-location pip
 RUN python -m pip install --no-warn-script-location /build
-
+COPY ./homepage/static /homepage/static
 # to allow xff headers from docker IPs
 ENV FORWARDED_ALLOW_IPS="*"
 EXPOSE 8000

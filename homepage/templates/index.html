@@ -4,23 +4,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{config.title}}</title>
-    <link rel="icon" href="/static/{{config.favicon}}" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="icon" href="{{config.favicon}}" />
+    <link rel="stylesheet" href="/static/bulma.css">
+    <style>
+      a:not(.button):not(.dropdown-item) { text-decoration: none;}
+    </style>
   </head>
   <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <img src="{{config.favicon}}" width="112" height="112">
+          <h1>{{config.title}}</h1>
+        </a>
+      </div>
+      </nav>
+
+
   <section class="section">
     <div class="container">
 {% block content %}
-        <h1 class="title m-4">
-          {{config.title}}
-        </h1>
-        <div class="tile is-ancestor">
+  <div class="tile is-ancestor">
   {% for link in config.links %}
     <div class="tile is-parent notification is-2 m-4 p-0 is-{{link.colour}}">
-        <div class="content p-0">
+        <div class="content">
             <a href="{{ link.url }}" target="_blank">
             <button class="button is-large m-0 p-6 is-{{link.colour}}">
-                <img src="/static/{{link.icon}}" /> &nbsp;
+                <img src="/images/{{link.icon}}" class="icon m-2" /> &nbsp;
                 {{ link.title }}
             </button>
             </a>

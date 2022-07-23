@@ -4,14 +4,19 @@
 build:
 	docker build -t ghcr.io/yaleman/homepage:latest .
 
+
 .PHONY: run
 run:
 	docker run --rm -it \
 	-v $(PWD)/links.json:/links.json \
-	-v $(PWD)/homepage/static:/homepage/static \
+	-v $(PWD)/images:/images \
 	-p 8000:8000 \
 	ghcr.io/yaleman/homepage:latest
 
-build_run:
-	build
-	run
+.PHONY: build_run
+build_run: build run
+
+.PHONY: localrun
+localrun:
+	uvicorn homepage:app --port 8000 --host 0.0.0.0 --reload
+

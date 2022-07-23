@@ -1,8 +1,6 @@
 # homepage
 
-<!-- [![PyPI](https://img.shields.io/pypi/v/homepage.svg)](https://pypi.org/project/homepage/) -->
-
-Home Page
+Home Page for clicky link things.
 
 ## Installation
 
@@ -21,3 +19,8 @@ To contribute to this library, first checkout the code. Then create a new virtua
     cd homepage
     poetry install
     source venv/bin/activate
+
+## Thanks
+
+- Home Icon from [Marek Polakovic @ The Noun Project](https://thenounproject.com/icon/home-113939/)
+  

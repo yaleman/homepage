@@ -2,15 +2,14 @@
 __pycache__/
 *.py[cod]
 *$py.class
-venv
 .eggs
+.mypy_cache
 .pytest_cache
 *.egg-info
 .DS_Store
 dist
 build
 **/__pycache__/*
-venv/
 .vscode/
 config.py
 *.egg-info/
@@ -18,3 +17,5 @@ dist/
 .env
 build/
 links.json
+# because I put all sorts of weird weeb things in here for testing
+images/
