@@ -30,7 +30,7 @@ class ConfigFile(BaseSettings):
     links: List[Link]
 
     @validator("favicon")
-    def validate_favicon(value: Optional[str]) -> str:
+    def validate_favicon(cls, value: Optional[str]) -> str:
         if value is None:
             return "/static/favicon.svg"
         return f"/images/{value}"

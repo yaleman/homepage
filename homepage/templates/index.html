@@ -5,42 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{config.title}}</title>
     <link rel="icon" href="{{config.favicon}}" />
-    <link rel="stylesheet" href="/static/bulma.css">
-    <style>
-      a:not(.button):not(.dropdown-item) { text-decoration: none;}
-    </style>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          <img src="{{config.favicon}}" width="112" height="112">
-          <h1>{{config.title}}</h1>
-        </a>
-      </div>
-      </nav>
+    <main>
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <span class="fs-4">{{config.title}}</span>
+      </a>
+      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" action="https://duckduckgo.com/">
+        <input type="search" name="q" autofocus class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+      </form>
+    </header>
 
 
-  <section class="section">
     <div class="container">
 {% block content %}
-  <div class="tile is-ancestor">
   {% for link in config.links %}
-    <div class="tile is-parent notification is-2 m-4 p-0 is-{{link.colour}}">
-        <div class="content">
-            <a href="{{ link.url }}" target="_blank">
-            <button class="button is-large m-0 p-6 is-{{link.colour}}">
-                <img src="/images/{{link.icon}}" class="icon m-2" /> &nbsp;
+
+    <a href="{{ link.url }}" target="_blank">
+      <button type="button" class="btn btn-{{link.colour}} btn-lg">
+                <img src="/images/{{link.icon}}" class="icon m-2" width="100px" height="100px" /> &nbsp;
                 {{ link.title }}
             </button>
-            </a>
-        </div>
-    </div>
   {% endfor %}
-</div>
-</p>
 {% endblock %}
-</div>
-</section>
+  </main>
 </body>
 </html>
