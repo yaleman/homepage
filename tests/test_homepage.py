@@ -4,8 +4,14 @@ from fastapi.testclient import TestClient
 from homepage import app
 
 
-def test_example_function() -> None:
-    """ tests something """
+def test_homepage() -> None:
+    """ tests homepage """
     client = TestClient(app)
 
     assert client.get("/")
+
+def test_config() -> None:
+    """ tests something """
+    client = TestClient(app)
+
+    assert client.get("/config")

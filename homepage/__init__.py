@@ -59,9 +59,9 @@ async def apple_touch_icon() -> FileResponse:
     return FileResponse(STATIC_DIR / "apple-touch-icon.png")
 
 @app.get("/config")
-def get_config() -> Dict[str, Any]:
+def get_config() -> ConfigFile:
     """ returns the config file """
-    return get_config()
+    return load_config()
 
 @app.get("/health")
 async def healthcheck() -> str:
