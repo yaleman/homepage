@@ -11,7 +11,6 @@ RUN apt-get update
 RUN apt-get install -y curl
 RUN apt-get clean
 
-
 RUN mkdir -p /home/homepage/
 RUN chown homepage /home/homepage -R
 
