@@ -31,6 +31,7 @@ class ConfigFile(BaseSettings):
 
     @validator("favicon")
     def validate_favicon(cls, value: Optional[str]) -> str:
+        """ validates the favicon setting """
         if value is None:
             return "/static/favicon.svg"
         return f"/images/{value}"
