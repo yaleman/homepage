@@ -1,0 +1,22 @@
+{
+    "title" : "Home Page",
+    "favicon" : "kanidm.svg",
+    "links" : [
+        {
+            "title" : "Kanidm Github",
+            "url" : "https://github.com/kanidm/kanidm",
+            "colour" : "light",
+            "icon" : "github.svg"
+        },
+        {
+            "title" : "Kanidm Docs",
+            "url" : "https://kanidm.com/documentation",
+            "icon" : "kanidm.svg"
+        },
+        {
+            "title" : "Feedly",
+            "url" : "https://feedly.com",
+            "icon" : "feedly.svg"
+        }
+    ]
+}

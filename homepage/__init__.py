@@ -2,7 +2,7 @@
 
 from pathlib import Path
 import sys
-from typing import List, Optional, Union
+from typing import Any, Dict, Union
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 
@@ -10,34 +10,10 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse, Response
 from fastapi.staticfiles import StaticFiles
 from loguru import logger
-from pydantic import BaseSettings, BaseModel, validator
 
+from .config import ConfigFile
 
-class Link(BaseModel):
-    """link object"""
-
-    url: str
-    title: str
-    icon: Optional[str] = "default.png"
-    colour: Optional[str] = "white"
-
-
-class ConfigFile(BaseSettings):
-    """link list"""
-
-    title: str
-    favicon: Optional[str] = None
-    links: List[Link]
-
-    @validator("favicon")
-    def validate_favicon(cls, value: Optional[str]) -> str:
-        """ validates the favicon setting """
-        if value is None:
-            return "/static/favicon.svg"
-        return f"/images/{value}"
-
-
-
+# Checking the setup stuff
 if Path("/images").exists():
     IMAGES_DIR = Path("/images").expanduser().resolve()
 elif Path("./images/").exists():
@@ -63,8 +39,8 @@ if (IMAGES_DIR / "default.png").exists():
 else:
     DEFAULT_IMAGE_PATH = STATIC_DIR / "default.png"
 
+# init the app
 app = FastAPI()
-
 
 # Jinja things
 env = Environment(loader=PackageLoader("homepage"), autoescape=select_autoescape())
@@ -77,22 +53,35 @@ async def default_image() -> Union[FileResponse,Response]:
         return FileResponse(DEFAULT_IMAGE_PATH)
     return Response(status_code=404)
 
+@app.get("/apple-touch-icon.png")
+async def apple_touch_icon() -> FileResponse:
+    """Provides the apple touch icon"""
+    return FileResponse(STATIC_DIR / "apple-touch-icon.png")
+
+@app.get("/config")
+def get_config() -> Dict[str, Any]:
+    """ returns the config file """
+    return get_config()
 
 @app.get("/health")
 async def healthcheck() -> str:
     """default image"""
     return "OK"
 
+def load_config() -> ConfigFile:
+    """ loads the config """
+    config_file = Path("links.json")
+    if config_file.exists():
+        config = ConfigFile.parse_file(config_file.expanduser().resolve())
+    else:
+        config = ConfigFile(title="This is a site without a config", links=[])
+    return config
+
 @app.get("/")
 async def homepage() -> Response:
     """home page"""
-    linkfile = Path("links.json")
-    if linkfile.exists():
-        config = ConfigFile.parse_file(linkfile.expanduser().resolve())
-    else:
-        config = ConfigFile(title="This is a site without a config", links=[])
     template = env.get_template("index.html")
-    return Response(template.render(config=config))
+    return Response(template.render(config=load_config()))
 
 app.mount(
     "/static", StaticFiles(directory=STATIC_DIR.expanduser().resolve()), name="static"
