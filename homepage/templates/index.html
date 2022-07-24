@@ -20,14 +20,24 @@
           </form>
         </header>
 
-        <div class="container">
+        <div class="card-group">
 {% block content %}
+<div class="row">
   {% for link in config.links %}
-          <a href="{{ link.url }}" target="_blank">
-            <button type="button" class="btn btn-{{link.colour}} btn-lg">
-              <img src="/images/{{link.icon}}" class="icon m-2" width="100px" height="100px" /> &nbsp;
-              {{ link.title }}</button></a>
+  <div class="col-sm-3 text-center">
+  <a href="{{ link.url }}" target="_blank" class="card-link">
+  <div class="card py-3 text-center {% if link.colour in ('white', 'light') %}text-dark{% else %}text-light{% endif %} bg-{{link.colour}}" >
+    <center>
+    <img src="/images/{{link.icon}}" class="card-img-top bg-{{link.colour}}" alt="{{ link.title }}" style="width:4.0em;">
+  </center>
+    <div class="card-body">
+      <p class="card-text">{{ link.title }}</p>
+    </div>
+  </div>
+  </a>
+  </div>
 {% endfor %}
+</div>
 {% endblock %}
   </main></div>
 </body>
