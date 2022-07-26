@@ -7,10 +7,6 @@ FROM python:3.10-slim
 # ubuntu mode
 RUN useradd homepage
 
-RUN apt-get update
-RUN apt-get install -y curl
-RUN apt-get clean
-
 RUN mkdir -p /home/homepage/
 RUN chown homepage /home/homepage -R
 
@@ -22,15 +18,19 @@ COPY homepage homepage
 COPY poetry.lock .
 COPY pyproject.toml .
 
-# RUN python -m pip install poetry
-
 RUN chown homepage /build -R
 WORKDIR /
 USER homepage
 
 RUN python -m pip install --upgrade --no-warn-script-location pip
-RUN python -m pip install --no-warn-script-location /build
+RUN python -m pip install --no-cache --no-warn-script-location /build
+USER root
+RUN rm -rf /build
+USER homepage
 COPY ./homepage/static /homepage/static
+RUN python -m pip uninstall poetry
+RUN rm -rf /home/homepage/.cache/
+
 # to allow xff headers from docker IPs
 ENV FORWARDED_ALLOW_IPS="*"
 EXPOSE 8000
