@@ -1,6 +1,7 @@
 {
     "title" : "Home Page",
     "favicon" : "kanidm.svg",
+    "open_in_new_tab" : false,
     "links" : [
         {
             "title" : "Kanidm Github",

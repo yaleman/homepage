@@ -30,7 +30,7 @@
 <div class="row">
   {% for link in config.links %}
   <div class="col-sm-2 text-center">
-  <a href="{{ link.url }}" target="_blank" class="card-link" >
+  <a href="{{ link.url }}" {% if config.open_in_new_tab %}target="_blank"{% endif %} class="card-link" >
   <div class="card py-3 pb-0 text-center {% if link.colour in ('white', 'light') %}text-dark{% else %}text-light{% endif %} bg-{{link.colour}}" >
     <center>
     <img src="/images/{{link.icon}}" class="card-img-top bg-{{link.colour}}" alt="{{ link.title }}" style="width:4.0em; height: 4.0em;">

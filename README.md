@@ -32,4 +32,4 @@ Or in docker:
 ## Thanks
 
 - Home Icon from [Marek Polakovic @ The Noun Project](https://thenounproject.com/icon/home-113939/)
-  
+- [FastAPI](https://fastapi.tiangolo.com/) for making this so very easy.

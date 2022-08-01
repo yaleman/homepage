@@ -15,11 +15,11 @@ class Link(BaseModel):
 
 
 class ConfigFile(BaseSettings):
-    """link list"""
-
-    title: str
+    """ config file things """
     favicon: Optional[str] = None
     links: List[Link]
+    open_in_new_tab: Optional[bool] = False
+    title: str
 
     @validator("favicon")
     def validate_favicon(cls, value: Optional[str]) -> str:
