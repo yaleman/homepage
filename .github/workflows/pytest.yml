@@ -21,7 +21,7 @@ jobs:
       - name: Running pytest
         run: |
           python --version
-          mkdir ./images/
+          mkdir -p ./images/
           python -m pip install --quiet --no-cache-dir --upgrade poetry
           poetry install
           poetry run python -m pytest

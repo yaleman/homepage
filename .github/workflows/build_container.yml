@@ -16,7 +16,7 @@ jobs:
           python-version: '3.10'
       - name: Running python tests first
         run: |
-          mkdir images
+          mkdir -p images
           python -m pip install poetry
           make test
           rm -rf images
