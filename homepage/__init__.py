@@ -10,6 +10,7 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse, Response
 from fastapi.staticfiles import StaticFiles
 from loguru import logger
+from prometheus_fastapi_instrumentator import Instrumentator
 
 from .config import ConfigFile
 
@@ -45,6 +46,13 @@ app = FastAPI()
 # Jinja things
 env = Environment(loader=PackageLoader("homepage"), autoescape=select_autoescape())
 
+
+@app.on_event("startup")
+async def startup():
+    """ Startup things """
+
+    # set up the prometheus exporter on /metrics
+    Instrumentator().instrument(app).expose(app)
 
 @app.get("/images/default.png")
 async def default_image() -> Union[FileResponse,Response]:
