@@ -48,7 +48,7 @@ env = Environment(loader=PackageLoader("homepage"), autoescape=select_autoescape
 
 
 @app.on_event("startup")
-async def startup():
+async def startup() -> None:
     """ Startup things """
 
     # set up the prometheus exporter on /metrics
