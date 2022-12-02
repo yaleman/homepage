@@ -17,7 +17,7 @@ trio = ["trio (>=0.16)"]
 
 [[package]]
 name = "astroid"
-version = "2.12.12"
+version = "2.12.13"
 description = "An abstract syntax tree for Python with inference support."
 category = "dev"
 optional = false
@@ -444,14 +444,14 @@ email = ["email-validator (>=1.0.3)"]
 
 [[package]]
 name = "pylint"
-version = "2.15.6"
+version = "2.15.7"
 description = "python code static checker"
 category = "dev"
 optional = false
 python-versions = ">=3.7.2"
 
 [package.dependencies]
-astroid = ">=2.12.12,<=2.14.0-dev0"
+astroid = ">=2.12.13,<=2.14.0-dev0"
 colorama = {version = ">=0.4.5", markers = "sys_platform == \"win32\""}
 dill = ">=0.2"
 isort = ">=4.2.5,<6"
@@ -714,7 +714,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "96025a2ebaf6186cbff56498b9aba4a501dc08c9fc25ecae51dbd71121e00429"
+content-hash = "4cccc97e153d41fc9409947e97da3d65e40070c4c64b57b5f52b51591daeba90"
 
 [metadata.files]
 anyio = [
@@ -722,8 +722,8 @@ anyio = [
     {file = "anyio-3.6.1.tar.gz", hash = "sha256:413adf95f93886e442aea925f3ee43baa5a765a64a0f52c6081894f9992fdd0b"},
 ]
 astroid = [
-    {file = "astroid-2.12.12-py3-none-any.whl", hash = "sha256:72702205200b2a638358369d90c222d74ebc376787af8fb2f7f2a86f7b5cc85f"},
-    {file = "astroid-2.12.12.tar.gz", hash = "sha256:1c00a14f5a3ed0339d38d2e2e5b74ea2591df5861c0936bb292b84ccf3a78d83"},
+    {file = "astroid-2.12.13-py3-none-any.whl", hash = "sha256:10e0ad5f7b79c435179d0d0f0df69998c4eef4597534aae44910db060baeb907"},
+    {file = "astroid-2.12.13.tar.gz", hash = "sha256:1493fe8bd3dfd73dc35bd53c9d5b6e49ead98497c47b2307662556a5692d29d7"},
 ]
 attrs = [
     {file = "attrs-21.4.0-py2.py3-none-any.whl", hash = "sha256:2d27e3784d7a565d36ab851fe94887c5eccd6a463168875832a1be79c82828b4"},
@@ -1048,8 +1048,8 @@ pydantic = [
     {file = "pydantic-1.10.2.tar.gz", hash = "sha256:91b8e218852ef6007c2b98cd861601c6a09f1aa32bbbb74fab5b1c33d4a1e410"},
 ]
 pylint = [
-    {file = "pylint-2.15.6-py3-none-any.whl", hash = "sha256:15060cc22ed6830a4049cf40bc24977744df2e554d38da1b2657591de5bcd052"},
-    {file = "pylint-2.15.6.tar.gz", hash = "sha256:25b13ddcf5af7d112cf96935e21806c1da60e676f952efb650130f2a4483421c"},
+    {file = "pylint-2.15.7-py3-none-any.whl", hash = "sha256:1d561d1d3e8be9dd880edc685162fbdaa0409c88b9b7400873c0cf345602e326"},
+    {file = "pylint-2.15.7.tar.gz", hash = "sha256:91e4776dbcb4b4d921a3e4b6fec669551107ba11f29d9199154a01622e460a57"},
 ]
 pylint-pydantic = [
     {file = "pylint_pydantic-0.1.4-py3-none-any.whl", hash = "sha256:d42d9e95255b2f70f82a674cec159f417263363c7da0e28998964d83d7330c72"},
