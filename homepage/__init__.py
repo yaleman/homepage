@@ -54,14 +54,14 @@ async def startup() -> None:
     # set up the prometheus exporter on /metrics
     Instrumentator().instrument(app).expose(app)
 
-@app.get("/images/default.png")
+@app.get("/images/default.png", response_model=None)
 async def default_image() -> Union[FileResponse,Response]:
     """default image"""
     if DEFAULT_IMAGE_PATH.exists():
         return FileResponse(DEFAULT_IMAGE_PATH)
     return Response(status_code=404)
 
-@app.get("/apple-touch-icon.png")
+@app.get("/apple-touch-icon.png", response_model=None)
 async def apple_touch_icon() -> FileResponse:
     """Provides the apple touch icon"""
     return FileResponse(STATIC_DIR / "apple-touch-icon.png")
@@ -71,7 +71,7 @@ def get_config() -> ConfigFile:
     """ returns the config file """
     return load_config()
 
-@app.get("/health")
+@app.get("/health", response_model=None)
 async def healthcheck() -> str:
     """default image"""
     return "OK"
@@ -85,7 +85,7 @@ def load_config() -> ConfigFile:
         config = ConfigFile(title="This is a site without a config", links=[])
     return config
 
-@app.get("/")
+@app.get("/", response_model=None)
 async def homepage() -> Response:
     """home page"""
     template = env.get_template("index.html")
