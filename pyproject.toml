@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "homepage"
-version = "0.0.2"
+version = "0.0.3"
 description = "Home Page"
 authors = [
     "James Hogkinson <james@terminaloutcomes.com>",
@@ -53,7 +53,6 @@ build-backend = "poetry.core.masonry.api"
 name = "homepage"
 description = "Home Page"
 license = "MIT"
-version = "0.0.1"
 authors = [
     { name = "James Hogkinson", email = "james@terminaloutcomes.com" },
 ]
