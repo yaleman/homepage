@@ -2,7 +2,7 @@
 
 from pathlib import Path
 import sys
-from typing import Any, Dict, Union
+from typing import Union
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 
