@@ -42,17 +42,16 @@ else:
 
 # init the app
 app = FastAPI()
+Instrumentator().instrument(app).expose(app)
 
 # Jinja things
 env = Environment(loader=PackageLoader("homepage"), autoescape=select_autoescape())
 
 
-@app.on_event("startup")
-async def startup() -> None:
-    """ Startup things """
-
-    # set up the prometheus exporter on /metrics
-    Instrumentator().instrument(app).expose(app)
+# @app.on_event("startup")
+# async def startup() -> None:
+#     """ Startup things """
+#     # set up the prometheus exporter on /metrics
 
 @app.get("/images/default.png", response_model=None)
 async def default_image() -> Union[FileResponse,Response]:
