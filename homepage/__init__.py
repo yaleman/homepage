@@ -1,5 +1,6 @@
 """ homepage thing """
 
+from functools import lru_cache
 from pathlib import Path
 import sys
 from typing import Union
@@ -78,11 +79,16 @@ def load_config() -> ConfigFile:
         config = ConfigFile(title="This is a site without a config", links=[])
     return config
 
+@lru_cache()
+def render_template(filename: str) -> str:
+    """ caching template rendering """
+    template = env.get_template(filename)
+    return template.render(config=load_config())
+
 @app.get("/", response_model=None)
 async def homepage() -> Response:
     """home page"""
-    template = env.get_template("index.html")
-    return Response(template.render(config=load_config()))
+    return Response(render_template("index.html"))
 
 app.mount(
     "/static", StaticFiles(directory=STATIC_DIR.expanduser().resolve()), name="static"

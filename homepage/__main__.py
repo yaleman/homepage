@@ -1,7 +1,7 @@
 """ CLI interface for homepage """
 
 import click
-import uvicorn
+from uvicorn import run
 
 @click.command()
 @click.option("--reload", is_flag=True)
@@ -15,7 +15,7 @@ def cli(
     proxy_headers: bool=False,
     ) -> None:
     """ homepage server """
-    uvicorn.run(
+    run(
         app="homepage:app",
         reload=reload,
         host=host,
