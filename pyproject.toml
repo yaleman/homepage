@@ -33,7 +33,7 @@ black = "^23.3.0"
 bandit = "^1.7.5"
 pylint-pydantic = "^0.1.8"
 requests = "^2.30.0"
-httpx = "^0.24.0"
+httpx = "^0.24.1"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.0.265"
