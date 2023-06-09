@@ -36,7 +36,7 @@ requests = "^2.31.0"
 httpx = "^0.24.1"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.0.270"
+ruff = "^0.0.272"
 
 [tool.pylint.MASTER]
 max-line-length = 200
