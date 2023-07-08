@@ -8,6 +8,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 
 
 from fastapi import FastAPI
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import FileResponse, Response
 from fastapi.staticfiles import StaticFiles
 from loguru import logger
@@ -43,7 +44,10 @@ else:
 
 # init the app
 app = FastAPI()
+# compression, default is 9
+app.add_middleware(GZipMiddleware, minimum_size=1000)
 Instrumentator().instrument(app).expose(app)
+
 
 # Jinja things
 env = Environment(loader=PackageLoader("homepage"), autoescape=select_autoescape())
@@ -55,10 +59,22 @@ async def default_image() -> Union[FileResponse,Response]:
         return FileResponse(DEFAULT_IMAGE_PATH)
     return Response(status_code=404)
 
+@app.get("/favicon.ico", response_model=None)
+async def favicon() -> Union[FileResponse,Response]:
+    """default image"""
+    return FileResponse(STATIC_DIR / "favicon.ico")
+
 @app.get("/apple-touch-icon.png", response_model=None)
 async def apple_touch_icon() -> FileResponse:
     """Provides the apple touch icon"""
     return FileResponse(STATIC_DIR / "apple-touch-icon.png")
+
+@app.get("/manifest.webmanifest", response_model=None)
+async def manifest() -> Response:
+    """Provides the apple touch icon"""
+    contents = Path(STATIC_DIR / "manifest.webmanifest").read_text(encoding="utf-8")
+    return Response(contents, media_type="application/manifest+json")
+
 
 @app.get("/config")
 def get_config() -> ConfigFile:
@@ -70,11 +86,12 @@ async def healthcheck() -> str:
     """default image"""
     return "OK"
 
+@lru_cache()
 def load_config() -> ConfigFile:
     """ loads the config """
     config_file = Path("links.json")
     if config_file.exists():
-        config = ConfigFile.parse_file(config_file.expanduser().resolve())
+        config = ConfigFile.model_validate_json(config_file.read_text(encoding="utf-8"))
     else:
         config = ConfigFile(title="This is a site without a config", links=[])
     return config

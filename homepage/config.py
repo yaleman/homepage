@@ -2,7 +2,8 @@
 
 from typing import List, Optional
 
-from pydantic import BaseSettings, BaseModel, validator
+from pydantic import field_validator, BaseModel
+from pydantic_settings import BaseSettings
 
 
 class Link(BaseModel):
@@ -21,7 +22,8 @@ class ConfigFile(BaseSettings):
     open_in_new_tab: Optional[bool] = False
     title: str
 
-    @validator("favicon")
+    @field_validator("favicon")
+    @classmethod
     def validate_favicon(cls, value: Optional[str]) -> str:
         """ validates the favicon setting """
         if value is None:

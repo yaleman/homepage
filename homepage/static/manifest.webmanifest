@@ -1,0 +1,24 @@
+{
+    "name": "Homepage",
+    "short_name": "Homepage",
+    "start_url": "/",
+    "display": "minimal-ui",
+    "background_color": "white",
+    "dir": "auto",
+    "lang": "en",
+    "theme_color": "white",
+    "icons": [
+        {
+            "src": "apple-touch-icon.png",
+            "type": "image/png",
+            "sizes": "512x512",
+            "purpose": "any"
+        },
+        {
+            "src": "apple-touch-icon.png",
+            "type": "image/png",
+            "sizes": "512x512",
+            "purpose": "maskable"
+        }
+    ]
+}

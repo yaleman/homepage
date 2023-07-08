@@ -4,14 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{config.title}}</title>
-    <link rel="icon" href="{{config.favicon}}" />
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="theme-color" content="#990099">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{config.favicon}}" sizes="any" type="image/svg+xml">
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/service_worker.js"></script>
     <style type="text/css">
       a.card-link   {
         text-decoration: none;
       }
     </style>
+
   </head>
   <body>
     <main>
