@@ -17,7 +17,7 @@ fastapi = "^0.100.0"
 click = "^8.1.6"
 Jinja2 = "^3.1.2"
 loguru = "^0.7.0"
-prometheus-fastapi-instrumentator = "^6.0.0"
+prometheus-fastapi-instrumentator = "^6.1.0"
 pydantic-settings = "^2.0.2"
 
 [tool.poetry.dependencies.uvicorn]
