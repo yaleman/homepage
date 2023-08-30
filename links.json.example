@@ -1,23 +1,25 @@
 {
-    "title" : "Home Page",
-    "favicon" : "kanidm.svg",
-    "open_in_new_tab" : false,
-    "links" : [
+    "favicon": "/images/kanidm.svg",
+    "links": [
         {
-            "title" : "Kanidm Github",
-            "url" : "https://github.com/kanidm/kanidm",
-            "colour" : "light",
-            "icon" : "github.svg"
+            "url": "https://github.com/kanidm/kanidm",
+            "title": "Kanidm Github",
+            "icon": "github.svg",
+            "colour": "light"
         },
         {
-            "title" : "Kanidm Docs",
-            "url" : "https://kanidm.com/documentation",
-            "icon" : "kanidm.svg"
+            "url": "https://kanidm.com/documentation",
+            "title": "Kanidm Docs",
+            "icon": "kanidm.svg",
+            "colour": "white"
         },
         {
-            "title" : "Feedly",
-            "url" : "https://feedly.com",
-            "icon" : "feedly.svg"
-        }
-    ]
+            "url": "https://feedly.com",
+            "title": "Feedly",
+            "icon": "feedly.svg",
+            "colour": "white"
+        },
+    ],
+    "open_in_new_tab": false,
+    "title": "Home Page"
 }

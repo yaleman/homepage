@@ -16,3 +16,4 @@ dist/
 .env
 build/
 links.json
+.ruff_cache
