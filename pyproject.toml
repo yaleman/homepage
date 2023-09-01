@@ -13,7 +13,7 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.9"
 pydantic = "^2.3.0"
-fastapi = "^0.101.0"
+fastapi = "^0.103.0"
 Jinja2 = "^3.1.2"
 loguru = "^0.7.0"
 prometheus-fastapi-instrumentator = "^6.1.0"
