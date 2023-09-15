@@ -35,7 +35,7 @@ mypy = "^1.5"
 black = "^23.9.1"
 pylint-pydantic = "^0.2.4"
 requests = "^2.31.0"
-httpx = "^0.24.1"
+httpx = "^0.25.0"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.0.289"
