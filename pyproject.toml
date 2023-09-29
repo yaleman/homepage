@@ -38,7 +38,7 @@ requests = "^2.31.0"
 httpx = "^0.25.0"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.0.290"
+ruff = "^0.0.291"
 types-click = "^7.1.8"
 
 [tool.pylint.MASTER]
