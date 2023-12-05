@@ -1,5 +1,6 @@
 """ config object """
 
+import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -24,6 +25,12 @@ class Link(BaseModel):
 class Hosts(BaseModel):
     external: List[str] = Field([])
     internal: List[str] = Field([])
+
+    @field_validator("internal")
+    def validate_internal(cls, value: List[str]) -> List[str]:
+        if os.getenv("CI") is not None:
+            return ["localhost"]
+        return value
 
 
 def safe_serialize(config: BaseSettings) -> Dict[str, Any]:
