@@ -4,7 +4,7 @@ import click
 import questionary
 import validators  # type: ignore
 
-from .config import DEFAULT_COLOUR, DEFAULT_ICON, ConfigFile, Link, load_config
+from .config import DEFAULT_COLOUR, DEFAULT_ICON, ConfigFile, Link
 
 
 def add_link(config: ConfigFile, filepath: Path) -> None:
@@ -35,10 +35,19 @@ def add_link(config: ConfigFile, filepath: Path) -> None:
             f"The icon doesn't exist at images/{link_icon}, are you sure?"
         ).ask():
             break
+    internal_only = questionary.confirm("Is this link internal only?").ask()
+    if internal_only is None:
+        return
     link_colour = questionary.text("Select a background?", default=DEFAULT_COLOUR).ask()
     if link_colour is None:
         return
-    link = Link(url=link_url, title=link_name, icon=link_icon, colour=link_colour)
+    link = Link(
+        url=link_url,
+        title=link_name,
+        icon=link_icon,
+        colour=link_colour,
+        internal_only=internal_only,
+    )
     config.links.append(link)
     new_file_contents = config.model_dump_json(indent=4)
     print("Adding the following link:")
@@ -71,7 +80,7 @@ def edit_link(config: ConfigFile, filepath: Path) -> None:
 def cli(filename: str = "links.json") -> None:
     """CLI for homepage"""
     filepath = Path(filename)
-    config = load_config(filepath)
+    config = ConfigFile.load_config(filepath)
     if config is None:
         print("Failed to load config, bailing...")
         return

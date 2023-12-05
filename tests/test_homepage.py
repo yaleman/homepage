@@ -5,13 +5,16 @@ from homepage import app
 
 
 def test_homepage() -> None:
-    """ tests homepage """
+    """tests homepage"""
     client = TestClient(app)
 
-    assert client.get("/")
+    assert client.get("/", headers={"host": "localhost:8000"})
+    assert client.get("/", headers={"host": "example.com:8000"})
+
 
 def test_config() -> None:
-    """ tests something """
+    """tests something"""
     client = TestClient(app)
 
-    assert client.get("/config")
+    assert client.get("/config", headers={"host": "localhost:8000"})
+    assert client.get("/config", headers={"host": "example.com:8000"})
