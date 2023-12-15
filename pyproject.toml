@@ -29,7 +29,7 @@ extras = [
 version = "^0.24.0"
 
 [tool.poetry.dev-dependencies]
-pylint = "^3.0.2"
+pylint = "^3.0.3"
 pytest = "^7.4.3"
 mypy = "^1.7"
 black = "^23.12.0"
