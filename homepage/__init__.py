@@ -126,7 +126,7 @@ def render_template(filename: str, host: Optional[str]) -> str:
 @app.get("/", response_model=None)
 async def homepage(host: Annotated[str | None, Header()] = None) -> Response:
     """home page"""
-    logger.debug("Host header: {}", host)
+    # logger.debug("Host header: {}", host)
     return Response(render_template("index.html", host))
 
 
