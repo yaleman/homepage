@@ -30,7 +30,7 @@ version = "^0.27.1"
 
 [tool.poetry.dev-dependencies]
 pylint = "^3.1.0"
-pytest = "^8.0.2"
+pytest = "^8.1.1"
 mypy = "^1.9"
 black = "^24.2.0"
 pylint-pydantic = "^0.3.2"
