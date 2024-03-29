@@ -20,7 +20,7 @@ prometheus-fastapi-instrumentator = "^7.0.0"
 pydantic-settings = "^2.2.1"
 questionary = "^2.0.1"
 click = "^8.1.7"
-validators = "^0.23.2"
+validators = "^0.24.0"
 
 [tool.poetry.dependencies.uvicorn]
 extras = [
