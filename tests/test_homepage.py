@@ -1,4 +1,4 @@
-""" tests for homepage app """
+"""tests for homepage app"""
 
 from fastapi.testclient import TestClient
 from homepage import app

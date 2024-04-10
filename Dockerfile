@@ -1,10 +1,8 @@
-FROM python:3.10-slim
-# FROM python:3.10-alpine
+FROM python:3.12-slim
 
 ########################################
 # add a user so we're not running as root
 ########################################
-# ubuntu mode
 RUN useradd homepage
 
 RUN mkdir -p /home/homepage/

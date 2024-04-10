@@ -1,4 +1,4 @@
-""" homepage thing """
+"""homepage thing"""
 
 from functools import lru_cache
 import os

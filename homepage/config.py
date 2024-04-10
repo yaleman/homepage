@@ -1,4 +1,4 @@
-""" config object """
+"""config object"""
 
 import os
 from pathlib import Path

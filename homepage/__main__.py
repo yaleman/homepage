@@ -1,4 +1,4 @@
-""" CLI interface for homepage """
+"""CLI interface for homepage"""
 
 import click
 from uvicorn import run
