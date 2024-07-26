@@ -27,7 +27,7 @@ version = "^0.30.3"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.2"
-mypy = "^1.10"
+mypy = "^1.11"
 pylint-pydantic = "^0.3.2"
 requests = "^2.32.3"
 httpx = "^0.27.0"
