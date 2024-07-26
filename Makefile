@@ -23,5 +23,5 @@ test:
 	poetry install
 	poetry run mypy --strict homepage
 	poetry run mypy --strict tests
-	poetry run ruff homepage tests
+	poetry run ruff check homepage tests
 	poetry run pytest
