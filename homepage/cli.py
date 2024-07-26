@@ -2,7 +2,7 @@ from pathlib import Path
 
 import click
 import questionary
-import validators  # type: ignore
+import validators
 
 from .config import DEFAULT_COLOUR, DEFAULT_ICON, ConfigFile, Link
 
