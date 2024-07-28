@@ -48,8 +48,8 @@ class ConfigFile(BaseSettings):
     open_in_new_tab: Optional[bool] = False
     title: str
     hosts: Hosts
-    image_dir: Optional[Path] = Field(default="./images")
-    static_dir: Optional[Path] = Field(default=Path(__file__).parent / "static")
+    image_dir: Path = Field(default="./images")
+    static_dir: Path = Field(default=Path(__file__).parent / "static")
 
     model_config = SettingsConfigDict(env_prefix="HOMEPAGE_")
 
@@ -70,7 +70,7 @@ class ConfigFile(BaseSettings):
 
     @field_validator("image_dir", mode="after")
     @classmethod
-    def validate_image_dir(cls, value: Path) -> str:
+    def validate_image_dir(cls, value: Path) -> Path:
         """validates the image path exists"""
         if not value.exists():
             raise ValueError(f"Image directory '{value}' does not exist!")
@@ -78,21 +78,19 @@ class ConfigFile(BaseSettings):
 
     @field_validator("static_dir", mode="after")
     @classmethod
-    def validate_static_dir(cls, value: Path) -> str:
+    def validate_static_dir(cls, value: Path) -> Path:
         """validates the static path exists"""
         if not value.exists():
             raise ValueError(f"Static directory '{value}' does not exist!")
         return value
 
     @classmethod
-    def load_config(
-        cls, filename: Optional[Path] = Path("links.json")
-    ) -> Optional["ConfigFile"]:
+    def load_config(cls, filename: Optional[Path] = Path("links.json")) -> "ConfigFile":
         """load a config file from a filepath"""
         if filename is None:
             filename = Path("links.json")
         if not filename.exists():
-            return None
+            raise ValueError(f"Config file '{filename}' does not exist!")
         return ConfigFile.model_validate_json(filename.read_text(encoding="utf-8"))
 
     def get_links(self, host: Optional[str] = None) -> List[Link]:

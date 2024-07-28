@@ -36,8 +36,6 @@ else:
         "Couldn't find static basedir, looked in /static, {}", "./homepage/static/"
     )
     sys.exit(1)
-logger.info("STATIC_DIR: {}", STATIC_DIR.expanduser().resolve())
-
 
 app_config = ConfigFile.load_config()
 
