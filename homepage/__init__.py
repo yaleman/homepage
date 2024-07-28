@@ -18,14 +18,14 @@ from prometheus_fastapi_instrumentator import Instrumentator
 from .config import ConfigFile, Hosts, safe_serialize
 
 # Checking the setup stuff
-if Path("/images").exists():
-    IMAGES_DIR = Path("/images").expanduser().resolve()
-elif Path("./images/").exists():
-    IMAGES_DIR = Path("./images/").expanduser().resolve()
-else:
-    logger.error("Couldn't find images basedir, looked in /images, {}", "./images/")
-    sys.exit(1)
-logger.info("IMAGES_DIR: {}", IMAGES_DIR)
+# if Path("/images").exists():
+#     IMAGES_DIR = Path("/images").expanduser().resolve()
+# elif Path("./images/").exists():
+#     IMAGES_DIR = Path("./images/").expanduser().resolve()
+# else:
+#     logger.error("Couldn't find images basedir, looked in /images, {}", "./images/")
+#     sys.exit(1)
+# logger.info("IMAGES_DIR: {}", IMAGES_DIR)
 
 if Path("/static").exists():
     STATIC_DIR = Path("/static").expanduser().resolve()
@@ -38,10 +38,13 @@ else:
     sys.exit(1)
 logger.info("STATIC_DIR: {}", STATIC_DIR.expanduser().resolve())
 
-if (IMAGES_DIR / "default.png").exists():
-    DEFAULT_IMAGE_PATH = IMAGES_DIR / "default.png"
+
+app_config = ConfigFile.load_config()
+
+if (app_config.image_dir / "default.png").exists():
+    DEFAULT_IMAGE_PATH = app_config.image_dir / "default.png"
 else:
-    DEFAULT_IMAGE_PATH = STATIC_DIR / "default.png"
+    DEFAULT_IMAGE_PATH = app_config.static_dir / "default.png"
 
 # init the app
 app = FastAPI()
@@ -133,6 +136,4 @@ async def homepage(host: Annotated[str | None, Header()] = None) -> Response:
 app.mount(
     "/static", StaticFiles(directory=STATIC_DIR.expanduser().resolve()), name="static"
 )
-app.mount(
-    "/images", StaticFiles(directory=IMAGES_DIR.expanduser().resolve()), name="images"
-)
+app.mount("/images", StaticFiles(directory=app_config.image_dir), name="images")

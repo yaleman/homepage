@@ -6,7 +6,7 @@ from typing import Any, Dict, List, Optional
 
 from loguru import logger
 from pydantic import Field, field_validator, BaseModel
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 DEFAULT_ICON = "default.png"
 DEFAULT_COLOUR = "white"
@@ -48,6 +48,10 @@ class ConfigFile(BaseSettings):
     open_in_new_tab: Optional[bool] = False
     title: str
     hosts: Hosts
+    image_dir: Optional[Path] = Field(default="./images")
+    static_dir: Optional[Path] = Field(default=Path(__file__).parent / "static")
+
+    model_config = SettingsConfigDict(env_prefix="HOMEPAGE_")
 
     @field_validator("favicon")
     @classmethod
@@ -63,6 +67,22 @@ class ConfigFile(BaseSettings):
         """check things are gud"""
         if not self.hosts.external and not self.hosts.internal:
             raise ValueError("You need to specify either an internal or external host!")
+
+    @field_validator("image_dir", mode="after")
+    @classmethod
+    def validate_image_dir(cls, value: Path) -> str:
+        """validates the image path exists"""
+        if not value.exists():
+            raise ValueError(f"Image directory '{value}' does not exist!")
+        return value
+
+    @field_validator("static_dir", mode="after")
+    @classmethod
+    def validate_static_dir(cls, value: Path) -> str:
+        """validates the static path exists"""
+        if not value.exists():
+            raise ValueError(f"Static directory '{value}' does not exist!")
+        return value
 
     @classmethod
     def load_config(
