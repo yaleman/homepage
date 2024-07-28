@@ -33,4 +33,4 @@ RUN rm -rf /home/homepage/.cache/
 ENV FORWARDED_ALLOW_IPS="*"
 EXPOSE 8000
 
-CMD /home/homepage/.local/bin/uvicorn homepage:app --host 0.0.0.0 --port 8000
+CMD /home/homepage/.local/bin/uvicorn --factory homepage:get_app --host 0.0.0.0 --port 8000

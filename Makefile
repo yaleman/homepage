@@ -1,7 +1,7 @@
 .DEFAULT: localrun
 .PHONY: localrun
 localrun:
-	poetry run uvicorn homepage:app --port 8000 --host 0.0.0.0 --reload
+	poetry run uvicorn --factory homepage:get_app --port 8000 --host 0.0.0.0 --reload
 
 .PHONY: build
 build:

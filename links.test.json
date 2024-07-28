@@ -1,0 +1,32 @@
+{
+    "title": "Home Page",
+    "open_in_new_tab": false,
+    "hosts": {
+        "external": [
+            "foo"
+        ],
+        "internal": [
+            "localhost:8000"
+        ]
+    },
+    "links": [
+        {
+            "title": "TechMeme",
+            "url": "https://techmeme.com",
+            "color": "white",
+            "icon": "techmeme.svg"
+        },
+        {
+            "title": "Steve",
+            "url": "https://chat.openai.com",
+            "color": "light",
+            "icon": "openai.svg"
+        },
+        {
+            "title": "Mastodon",
+            "url": "https://mastodon.social",
+            "color": "light",
+            "icon": "mastodon.svg"
+        }
+    ]
+}

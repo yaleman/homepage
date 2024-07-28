@@ -3,7 +3,7 @@
 import click
 from uvicorn import run
 
-from homepage import load_config
+from homepage.config import ConfigFile
 
 
 @click.command()
@@ -21,11 +21,12 @@ def cli(
 ) -> None:
     """homepage server"""
     if show_config:
-        config = load_config()
+        config = ConfigFile.load_config()
         print(config.model_dump_json())
     else:
         run(
-            app="homepage:app",
+            app="homepage:get_app",
+            factory=True,
             reload=reload,
             host=host,
             port=port,

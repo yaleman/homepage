@@ -24,7 +24,7 @@ class Link(BaseModel):
 
 class Hosts(BaseModel):
     external: List[str] = Field([])
-    internal: List[str] = Field([])
+    internal: List[str] = Field(["localhost"])
 
     @field_validator("internal")
     def validate_internal(cls, value: List[str]) -> List[str]:
@@ -85,12 +85,13 @@ class ConfigFile(BaseSettings):
         return value
 
     @classmethod
-    def load_config(cls, filename: Optional[Path] = Path("links.json")) -> "ConfigFile":
+    def load_config(cls, filename: Optional[Path] = None) -> "ConfigFile":
         """load a config file from a filepath"""
         if filename is None:
-            filename = Path("links.json")
+            filename = Path(os.getenv("HOMEPAGE_CONFIG_FILE", "links.json"))
         if not filename.exists():
             raise ValueError(f"Config file '{filename}' does not exist!")
+
         return ConfigFile.model_validate_json(filename.read_text(encoding="utf-8"))
 
     def get_links(self, host: Optional[str] = None) -> List[Link]:
