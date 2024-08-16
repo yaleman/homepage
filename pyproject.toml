@@ -22,7 +22,7 @@ validators = "^0.33.0"
 
 [tool.poetry.dependencies.uvicorn]
 extras = ["standard"]
-version = "^0.30.5"
+version = "^0.30.6"
 
 
 [tool.poetry.group.dev.dependencies]
