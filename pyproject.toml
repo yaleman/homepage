@@ -30,7 +30,7 @@ pytest = "^8.3.2"
 mypy = "^1.11"
 pylint-pydantic = "^0.3.2"
 requests = "^2.32.3"
-httpx = "^0.27.0"
+httpx = "^0.27.2"
 ruff = "^0.6.3"
 types-click = "^7.1.8"
 
