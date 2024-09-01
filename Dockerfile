@@ -33,4 +33,7 @@ RUN rm -rf /home/homepage/.cache/
 ENV FORWARDED_ALLOW_IPS="*"
 EXPOSE 8000
 
+HEALTHCHECK --interval=30s --retries=1 \
+  CMD python -m homepage --healthcheck
+
 CMD /home/homepage/.local/bin/uvicorn --factory homepage:get_app --host 0.0.0.0 --port 8000

@@ -28,6 +28,7 @@ class Hosts(BaseModel):
 
     @field_validator("internal")
     def validate_internal(cls, value: List[str]) -> List[str]:
+        # because GitHub actions is a thing
         if os.getenv("CI") is not None:
             return ["localhost"]
         return value

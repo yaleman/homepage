@@ -6,7 +6,9 @@ Home Page for clicky link things.
 
 Install this library using `pip`:
 
-    $ python -m pip install git+https://github.com/yaleman/homepage
+```shell
+python -m pip install git+https://github.com/yaleman/homepage
+```
 
 ## Usage
 
@@ -16,18 +18,25 @@ Spin up the docker container, mount `links.json` in the working dir - `/links.js
 
 To contribute to this library, first checkout the code. Then create a new virtual environment:
 
-    cd homepage
-    python -m pip install poetry
-    poetry install
+```shell
+cd homepage
+python -m pip install poetry
+poetry install
+```
 
 To run it natively:
 
-    make localrun 
+```shell
+$ make localrun 
+# or
+$ poetry run python -m homepage
+```
 
 Or in docker:
 
-    make build_run
-    
+```shell
+make build_run
+```
 
 ## Thanks
 

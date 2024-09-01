@@ -1,7 +1,6 @@
 """homepage thing"""
 
 from functools import lru_cache
-import os
 from pathlib import Path
 import sys
 from typing import Dict, Annotated, Any, Optional, Union
@@ -10,6 +9,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 
 from fastapi import FastAPI, Header
 from fastapi.middleware.gzip import GZipMiddleware
+from fastapi.exceptions import HTTPException
 from fastapi.responses import FileResponse, Response
 from fastapi.staticfiles import StaticFiles
 from loguru import logger
@@ -19,7 +19,6 @@ from .config import ConfigFile, Hosts, safe_serialize
 
 
 def get_app() -> FastAPI:
-
     if Path("/static").exists():
         STATIC_DIR = Path("/static").expanduser().resolve()
     elif Path("./homepage/static/").exists():
@@ -46,19 +45,19 @@ def get_app() -> FastAPI:
     # Jinja things
     env = Environment(loader=PackageLoader("homepage"), autoescape=select_autoescape())
 
-    @app.get("/images/default.png", response_model=None)
+    @app.get("/images/default.png", response_model=None, include_in_schema=False)
     async def default_image() -> Union[FileResponse, Response]:
         """default image"""
         if DEFAULT_IMAGE_PATH.exists():
             return FileResponse(DEFAULT_IMAGE_PATH)
         return Response(status_code=404)
 
-    @app.get("/favicon.ico", response_model=None)
+    @app.get("/favicon.ico", response_model=None, include_in_schema=False)
     async def favicon() -> Union[FileResponse, Response]:
         """default image"""
         return FileResponse(STATIC_DIR / "favicon.ico")
 
-    @app.get("/apple-touch-icon.png", response_model=None)
+    @app.get("/apple-touch-icon.png", response_model=None, include_in_schema=False)
     async def apple_touch_icon() -> FileResponse:
         """Provides the apple touch icon"""
         return FileResponse(STATIC_DIR / "apple-touch-icon.png")
@@ -70,13 +69,17 @@ def get_app() -> FastAPI:
         return Response(contents, media_type="application/manifest+json")
 
     @app.get("/config")
-    def get_config() -> Dict[str, Any]:
-        """returns the config file"""
-        return safe_serialize(load_config(os.getenv("HOMEPAGE_CONFIG")))
+    def get_config(host: Annotated[str | None, Header()] = None) -> Dict[str, Any]:
+        """Returns the config file, only accessible from internal hosts"""
+        if host in app_config.hosts.internal:
+            return safe_serialize(app_config)
+        raise HTTPException(
+            status_code=401, detail="Only accessible from internal hosts"
+        )
 
     @app.get("/health", response_model=None)
     async def healthcheck() -> str:
-        """default image"""
+        """Healthcheck endpoint"""
         return "OK"
 
     @lru_cache()
@@ -113,8 +116,12 @@ def get_app() -> FastAPI:
     @app.get("/", response_model=None)
     async def homepage(host: Annotated[str | None, Header()] = None) -> Response:
         """home page"""
-        # logger.debug("Host header: {}", host)
         return Response(render_template("index.html", host))
+
+    @app.get("/schema.json", description="Returns the JSON schema for the config file")
+    async def json_schema() -> Dict[str, Any]:
+        """Generates a JSON schema document for the config file"""
+        return ConfigFile.model_json_schema()
 
     app.mount(
         "/static",
