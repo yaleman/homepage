@@ -5,6 +5,8 @@ from fastapi.testclient import TestClient
 from homepage import get_app
 from starlette.routing import Mount, Route
 
+from homepage.config import ConfigFile
+
 
 def test_homepage(monkeypatch: Any) -> None:
     """tests homepage"""
@@ -22,9 +24,14 @@ def test_all_routes(monkeypatch: Any) -> None:
     app = get_app()
     client = TestClient(app)
 
+    config = ConfigFile.load_config()
+
     # validate that the config refuses to return a result if it's not a "local" host
     assert client.get("/config", headers={"host": "foo"}).status_code == 401
-    assert client.get("/config", headers={"host": "localhost:8000"}).status_code == 200
+    assert (
+        client.get("/config", headers={"host": config.hosts.internal[0]}).status_code
+        == 200
+    )
 
     for route in app.routes:
         if isinstance(route, Mount):
