@@ -24,7 +24,7 @@ pytest-cov = "^6.0.0"
 
 [tool.poetry.dependencies.uvicorn]
 extras = ["standard"]
-version = "^0.32.1"
+version = "^0.34.0"
 
 
 [tool.poetry.group.dev.dependencies]
