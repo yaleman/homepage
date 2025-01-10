@@ -30,7 +30,7 @@ version = "^0.34.0"
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"
 mypy = "^1.14"
-pylint-pydantic = "^0.3.4"
+pylint-pydantic = "^0.3.5"
 httpx = "^0.28.1"
 ruff = "^0.8.5"
 types-click = "^7.1.8"
