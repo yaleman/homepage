@@ -34,7 +34,7 @@ pylint-pydantic = "^0.3.5"
 httpx = "^0.28.1"
 ruff = "^0.9.10"
 types-click = "^7.1.8"
-types-requests = "^2.32.0.20241016"
+types-requests = "^2.32.0.20250306"
 
 [tool.pylint.MASTER]
 max-line-length = 200
