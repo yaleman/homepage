@@ -22,6 +22,5 @@ jobs:
         run: |
           python --version
           mkdir -p ./images/
-          python -m pip install --quiet --no-cache-dir --upgrade poetry
-          poetry install
-          poetry run python -m pytest
+          python -m pip install --quiet --no-cache-dir --upgrade uv
+          uv run python -m pytest

@@ -20,16 +20,15 @@ To contribute to this library, first checkout the code. Then create a new virtua
 
 ```shell
 cd homepage
-python -m pip install poetry
-poetry install
+python -m pip install uv
 ```
 
 To run it natively:
 
 ```shell
-$ make localrun 
+$ just localrun 
 # or
-$ poetry run python -m homepage
+$ uv run homepage
 ```
 
 Or in docker:

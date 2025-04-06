@@ -13,7 +13,7 @@ RUN mkdir -p build/homepage
 WORKDIR /build
 
 COPY homepage homepage
-COPY poetry.lock .
+COPY uv.lock .
 COPY pyproject.toml .
 
 RUN chown homepage /build -R
@@ -26,7 +26,6 @@ USER root
 RUN rm -rf /build
 USER homepage
 COPY ./homepage/static /homepage/static
-RUN python -m pip uninstall poetry
 RUN rm -rf /home/homepage/.cache/
 
 # to allow xff headers from docker IPs
@@ -34,6 +33,6 @@ ENV FORWARDED_ALLOW_IPS="*"
 EXPOSE 8000
 
 HEALTHCHECK --interval=30s --retries=1 \
-  CMD python -m homepage --healthcheck
+  CMD [ "/home/homepage/.local/bin/homepage", "--healthcheck" ]
 
-CMD /home/homepage/.local/bin/uvicorn --factory homepage:get_app --host 0.0.0.0 --port 8000
+CMD [ "/home/homepage/.local/bin/uvicorn", "--factory", "homepage:get_app", "--host","0.0.0.0", "--port","8000"]

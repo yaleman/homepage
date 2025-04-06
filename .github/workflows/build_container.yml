@@ -20,7 +20,7 @@ jobs:
       - name: Running python tests first
         run: |
           mkdir -p images
-          python -m pip install poetry
+          python -m pip install uv
           make test
           rm -rf images
       - name: Set up QEMU

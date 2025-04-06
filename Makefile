@@ -4,13 +4,13 @@ CONTAINER_TAG=latest
 .DEFAULT: localrun
 .PHONY: localrun
 localrun:
-	poetry run uvicorn --factory homepage:get_app --port 8000 --host 0.0.0.0 --reload
+	uv run uvicorn --factory homepage:get_app --port 8000 --host 0.0.0.0 --reload
 
 .PHONY: lint
 lint:
-	poetry run mypy --strict homepage
-	poetry run mypy --strict tests
-	poetry run ruff check homepage tests
+	uv run mypy --strict homepage
+	uv run mypy --strict tests
+	uv run ruff check homepage tests
 
 .PHONY: build
 build:
@@ -29,8 +29,7 @@ build_run: build run
 
 .PHONY: test
 test:
-	poetry install
-	poetry run mypy --strict homepage
-	poetry run mypy --strict tests
-	poetry run ruff check homepage tests
-	poetry run pytest
+	uv run mypy --strict homepage
+	uv run mypy --strict tests
+	uv run ruff check homepage tests
+	uv run pytest
