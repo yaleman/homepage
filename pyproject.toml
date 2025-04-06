@@ -17,8 +17,20 @@ dependencies = [
     "click<9.0.0,>=8.1.8",
     "validators<1.0.0,>=0.34.0",
     "requests<3.0.0,>=2.32.3",
-    "pytest-cov<7.0.0,>=6.1.0",
     "uvicorn[standard]<1.0.0,>=0.34.0",
+]
+
+
+[dependency-groups]
+dev = [
+    "pytest<9.0.0,>=8.3.5",
+    "mypy<2.0,>=1.15",
+    "pylint-pydantic<1.0.0,>=0.3.5",
+    "httpx<1.0.0,>=0.28.1",
+    "ruff<1.0.0,>=0.11.3",
+    "types-click<8.0.0,>=7.1.8",
+    "types-requests<3.0.0.0,>=2.32.0.20250328",
+    "pytest-cov>=6.1.1",
 ]
 
 
@@ -34,14 +46,3 @@ build-backend = "pdm.backend"
 
 [project.scripts]
 homepage = "homepage.__main__:cli"
-
-[dependency-groups]
-dev = [
-    "pytest<9.0.0,>=8.3.5",
-    "mypy<2.0,>=1.15",
-    "pylint-pydantic<1.0.0,>=0.3.5",
-    "httpx<1.0.0,>=0.28.1",
-    "ruff<1.0.0,>=0.11.3",
-    "types-click<8.0.0,>=7.1.8",
-    "types-requests<3.0.0.0,>=2.32.0.20250328",
-]

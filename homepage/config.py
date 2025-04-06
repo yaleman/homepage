@@ -49,7 +49,7 @@ class ConfigFile(BaseSettings):
     open_in_new_tab: Optional[bool] = False
     title: str
     hosts: Hosts
-    image_dir: Path = Field(default="./images")
+    image_dir: Path = Field(default=Path("./images"))
     static_dir: Path = Field(default=Path(__file__).parent / "static")
 
     model_config = SettingsConfigDict(env_prefix="HOMEPAGE_")
