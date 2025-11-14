@@ -23,7 +23,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "pytest<9.0.0,>=8.3.5",
+    "pytest>=8.3.5,<10.0.0",
     "mypy<2.0,>=1.15",
     "pylint-pydantic<1.0.0,>=0.3.5",
     "httpx<1.0.0,>=0.28.1",
