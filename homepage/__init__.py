@@ -39,7 +39,7 @@ def get_app() -> FastAPI:
     # init the app
     app = FastAPI()
     # compression, default is 9
-    app.add_middleware(GZipMiddleware, minimum_size=1000)
+    app.add_middleware(GZipMiddleware, minimum_size=1000)  # type: ignore[invalid-argument-type]
     Instrumentator().instrument(app).expose(app)
 
     # Jinja things

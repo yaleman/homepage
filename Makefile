@@ -6,12 +6,6 @@ CONTAINER_TAG=latest
 localrun:
 	uv run uvicorn --factory homepage:get_app --port 8000 --host 0.0.0.0 --reload
 
-.PHONY: lint
-lint:
-	uv run mypy --strict homepage
-	uv run mypy --strict tests
-	uv run ruff check homepage tests
-
 .PHONY: build
 build:
 	docker build -t $(CONTAINER):$(CONTAINER_TAG) .
@@ -26,10 +20,3 @@ run:
 
 .PHONY: build_run
 build_run: build run
-
-.PHONY: test
-test:
-	uv run mypy --strict homepage
-	uv run mypy --strict tests
-	uv run ruff check homepage tests
-	uv run pytest

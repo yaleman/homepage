@@ -37,9 +37,8 @@ build_run: build run
 
 # linting checks
 lint:
-	uv run mypy --strict homepage
-	uv run mypy --strict tests
-	uv run ruff check homepage tests
+	uv run ty check
+	uv run ruff check
 
 # test all the things
 test: lint

@@ -1,0 +1,17 @@
+[tools]
+python = "3.13"
+
+[tasks.check]
+depends = ["lint", "ruff", "test"]
+
+[tasks.lint]
+run = 'uv run ty check'
+
+[tasks.ruff]
+run = 'uv run ruff check'
+
+[tasks.test]
+run = 'uv run pytest'
+
+[tasks.coverage]
+run = 'uv run voera'

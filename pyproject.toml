@@ -1,36 +1,37 @@
 
 [project]
 name = "homepage"
-version = "0.0.4"
+version = "0.0.5"
 description = "Home Page"
 license = { text = "MIT" }
 authors = [{ name = "James Hogkinson", email = "james@terminaloutcomes.com" }]
-requires-python = "<4.0,>=3.12"
+requires-python = "<4.0,>=3.13"
 dependencies = [
-    "pydantic<3.0.0,>=2.11.2",
-    "fastapi<1.0.0,>=0.115.12",
-    "Jinja2<4.0.0,>=3.1.6",
-    "loguru<1.0.0,>=0.7.3",
-    "prometheus-fastapi-instrumentator<8.0.0,>=7.1.0",
-    "pydantic-settings<3.0.0,>=2.8.1",
-    "questionary<3.0.0,>=2.1.0",
-    "click<9.0.0,>=8.1.8",
-    "validators<1.0.0,>=0.34.0",
-    "requests<3.0.0,>=2.32.3",
-    "uvicorn[standard]<1.0.0,>=0.34.0",
+    "pydantic>=2.12.5",
+    "fastapi>=0.135.1",
+    "Jinja2>=3.1.6",
+    "loguru>=0.7.3",
+    "prometheus-fastapi-instrumentator>=7.1.0",
+    "pydantic-settings>=2.13.1",
+    "questionary>=2.1.0",
+    "click>=8.1.8",
+    "validators>=0.34.0",
+    "requests>=2.32.3",
+    "uvicorn[standard]>=0.34.0",
 ]
 
 
 [dependency-groups]
 dev = [
-    "pytest>=8.3.5,<10.0.0",
-    "mypy<2.0,>=1.15",
-    "pylint-pydantic<1.0.0,>=0.3.5",
-    "httpx<1.0.0,>=0.28.1",
-    "ruff<1.0.0,>=0.11.3",
-    "types-click<8.0.0,>=7.1.8",
-    "types-requests<3.0.0.0,>=2.32.0.20250328",
+    "pytest>=8.3.5",
+    "pylint-pydantic>=0.3.5",
+    "httpx>=0.28.1",
+    "ruff>=0.11.3",
+    "types-click>=7.1.8",
+    "types-requests>=2.32.0.20250328",
     "pytest-cov>=6.1.1",
+    "ty>=0.0.21",
+    "coveralls>=4.1.0",
 ]
 
 
