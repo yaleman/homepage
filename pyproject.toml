@@ -32,6 +32,7 @@ dev = [
     "pytest-cov>=6.1.1",
     "ty>=0.0.21",
     "coveralls>=4.1.0",
+    "coverage>=7.13.4",
 ]
 
 

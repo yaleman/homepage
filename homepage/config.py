@@ -64,6 +64,9 @@ class ConfigFile(BaseSettings):
             value = value[1:]
         return f"/images/{value}"
 
+    def _write_config(self, filepath: Path) -> None:
+        filepath.write_text(self.model_dump_json(indent=4), encoding="utf-8")
+
     def validate_config(self) -> None:
         """check things are gud"""
         if not self.hosts.external and not self.hosts.internal:

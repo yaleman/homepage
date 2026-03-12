@@ -1,5 +1,6 @@
 [tools]
 python = "3.13"
+uv = "latest"
 
 [tasks.check]
 depends = ["lint", "ruff", "test"]
@@ -14,4 +15,7 @@ run = 'uv run ruff check'
 run = 'uv run pytest'
 
 [tasks.coverage]
-run = 'uv run voera'
+run = [
+    "uv run coverage run --source=homepage --omit=homepage/__main__.py,homepage/cli.py -m pytest",
+    "uv run coveralls",
+]

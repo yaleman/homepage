@@ -249,6 +249,7 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "coverage" },
     { name = "coveralls" },
     { name = "httpx" },
     { name = "pylint-pydantic" },
@@ -277,6 +278,7 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "coverage", specifier = ">=7.13.4" },
     { name = "coveralls", specifier = ">=4.1.0" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "pylint-pydantic", specifier = ">=0.3.5" },
