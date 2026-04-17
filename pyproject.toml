@@ -30,7 +30,7 @@ dev = [
     "types-click>=7.1.8",
     "types-requests>=2.32.0.20250328",
     "pytest-cov>=6.1.1",
-    "ty>=0.0.21",
+    "ty>=0.0.31",
     "coveralls>=4.1.0",
     "coverage>=7.13.5",
 ]
