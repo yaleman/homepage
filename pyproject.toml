@@ -24,7 +24,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pytest>=9.0.3",
-    "pylint-pydantic>=0.3.5",
+    "pylint-pydantic>=0.4.1",
     "httpx>=0.28.1",
     "ruff>=0.11.3",
     "types-click>=7.1.8",
