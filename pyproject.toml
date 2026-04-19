@@ -2,9 +2,7 @@
 name = "homepage"
 version = "0.0.5"
 description = "Home Page"
-authors = [
-    { name = "James Hogkinson", email = "james@terminaloutcomes.com" },
-]
+authors = [{ name = "James Hogkinson", email = "james@terminaloutcomes.com" }]
 requires-python = "<4.0,>=3.13"
 dependencies = [
     "pydantic>=2.12.5",
@@ -32,10 +30,10 @@ dev = [
     "pytest>=9.0.3",
     "pylint-pydantic>=0.4.1",
     "httpx>=0.28.1",
-    "ruff>=0.11.3",
+    "ruff>=0.15.1",
     "types-click>=7.1.8",
     "types-requests>=2.32.0.20250328",
-    "pytest-cov>=6.1.1",
+    "pytest-cov>=7.1.0",
     "ty>=0.0.31",
     "coveralls>=4.1.0",
     "coverage>=7.13.5",
@@ -47,7 +45,5 @@ extension-pkg-whitelist = "pydantic"
 load-plugins = "pylint_pydantic"
 
 [build-system]
-requires = [
-    "pdm-backend",
-]
-build-backend = "pdm.backend"
+requires = ["hatchling"]
+build-backend = "hatchling.build"

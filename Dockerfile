@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.13-slim
 
 ########################################
 # add a user so we're not running as root
@@ -15,6 +15,7 @@ WORKDIR /build
 COPY homepage homepage
 COPY uv.lock .
 COPY pyproject.toml .
+COPY README.md .
 
 RUN chown homepage /build -R
 WORKDIR /
