@@ -1,10 +1,10 @@
-
 [project]
 name = "homepage"
 version = "0.0.5"
 description = "Home Page"
-license = { text = "MIT" }
-authors = [{ name = "James Hogkinson", email = "james@terminaloutcomes.com" }]
+authors = [
+    { name = "James Hogkinson", email = "james@terminaloutcomes.com" },
+]
 requires-python = "<4.0,>=3.13"
 dependencies = [
     "pydantic>=2.12.5",
@@ -19,7 +19,13 @@ dependencies = [
     "requests>=2.33.1",
     "uvicorn[standard]>=0.34.0",
 ]
+readme = "README.md"
 
+[project.license]
+text = "MIT"
+
+[project.scripts]
+homepage = "homepage.__main__:cli"
 
 [dependency-groups]
 dev = [
@@ -35,16 +41,13 @@ dev = [
     "coverage>=7.13.5",
 ]
 
-
 [tool.pylint.MASTER]
 max-line-length = 200
 extension-pkg-whitelist = "pydantic"
 load-plugins = "pylint_pydantic"
 
 [build-system]
-requires = ["pdm-backend"]
+requires = [
+    "pdm-backend",
+]
 build-backend = "pdm.backend"
-
-
-[project.scripts]
-homepage = "homepage.__main__:cli"
