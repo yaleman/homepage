@@ -1,0 +1,16 @@
+{
+	"files": {
+		"includes": [
+			"homepage/",
+			"!!homepage/static/js/bootstrap*.js",
+			"!!homepage/static/js/service_worker.js",
+			"!!homepage/static/css/bootstrap*.css",
+			"!.venv"
+		]
+	},
+	"json": {
+		"formatter": {
+			"trailingNewline": false
+		}
+	}
+}

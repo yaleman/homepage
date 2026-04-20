@@ -34,7 +34,7 @@ $ uv run homepage
 Or in docker:
 
 ```shell
-make build_run
+just build_run
 ```
 
 ## Thanks
