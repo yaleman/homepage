@@ -5,7 +5,7 @@ description = "Home Page"
 authors = [{ name = "James Hogkinson", email = "james@terminaloutcomes.com" }]
 requires-python = "<4.0,>=3.13"
 dependencies = [
-    "pydantic>=2.12.5",
+    "pydantic>=2.13.3",
     "fastapi>=0.135.1",
     "Jinja2>=3.1.6",
     "loguru>=0.7.3",
