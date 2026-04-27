@@ -3,9 +3,6 @@ biome = "latest"
 python = "3.13"
 uv = "latest"
 
-[tasks.check]
-depends = ["lint", "ruff", "test", "biome"]
-
 [tasks.lint]
 run = 'uv run ty check'
 
@@ -17,6 +14,9 @@ run = 'uv run pytest'
 
 [tasks.biome]
 run = ["biome format --fix", "biome ci"]
+
+[tasks.check]
+depends = ["lint", "ruff", "test", "biome"]
 
 [tasks.coverage]
 run = [
