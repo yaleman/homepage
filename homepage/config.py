@@ -1,11 +1,12 @@
 """config object"""
 
 import os
+from hashlib import sha256
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from loguru import logger
-from pydantic import Field, field_validator, BaseModel
+from pydantic import BaseModel, Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 DEFAULT_ICON = "default.png"
@@ -15,11 +16,18 @@ DEFAULT_COLOUR = "white"
 class Link(BaseModel):
     """link object"""
 
+    id: Optional[str] = Field(None)
     url: str
     title: str
     icon: Optional[str] = DEFAULT_ICON
     colour: Optional[str] = DEFAULT_COLOUR
     internal_only: bool = Field(False)
+
+    @model_validator(mode="after")
+    def generate_id(self) -> "Link":
+        if self.id is None:
+            self.id = sha256(self.title.encode("utf-8")).hexdigest()[:8]
+        return self
 
 
 class Hosts(BaseModel):

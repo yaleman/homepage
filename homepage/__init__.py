@@ -86,18 +86,19 @@ def get_app() -> FastAPI:
     def load_config(filepath: Optional[str] = None) -> ConfigFile:
         """loads the config"""
         if filepath is None:
-            filepath = "links.json"
-        config_file = Path(filepath)
-        if config_file.exists():
-            config = ConfigFile.model_validate_json(
-                config_file.read_text(encoding="utf-8")
-            )
+            config = ConfigFile.load_config()
         else:
-            config = ConfigFile(
-                title="This is a site without a config",
-                links=[],
-                hosts=Hosts(internal=[], external=[]),
-            )
+            config_file = Path(filepath)
+            if config_file.exists():
+                config = ConfigFile.model_validate_json(
+                    config_file.read_text(encoding="utf-8")
+                )
+            else:
+                config = ConfigFile(
+                    title="This is a site without a config",
+                    links=[],
+                    hosts=Hosts(internal=[], external=[]),
+                )
         config.validate_config()
         return config
 
