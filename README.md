@@ -21,20 +21,21 @@ To contribute to this library, first checkout the code. Then create a new virtua
 ```shell
 cd homepage
 python -m pip install uv
+uv sync
 ```
 
 To run it natively:
 
 ```shell
-$ just localrun 
+$ mise start 
 # or
-$ uv run homepage
+$ uv run uvicorn --factory homepage:get_app --port 8000 --host 0.0.0.0 --reload
 ```
 
 Or in docker:
 
 ```shell
-just build_run
+mise run_container
 ```
 
 ## Thanks

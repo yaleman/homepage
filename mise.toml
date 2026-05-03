@@ -23,3 +23,32 @@ run = [
     "uv run coverage run --source=homepage --omit=homepage/__main__.py,homepage/cli.py -m pytest",
     "uv run coveralls",
 ]
+
+[tasks.start]
+run = '''uv run uvicorn --factory homepage:get_app --port 8000 --host 0.0.0.0 --reload'''
+
+
+[tasks.build_container]
+description = "Build the docker container"
+run = '''docker buildx build \
+		-t "ghcr.io/yaleman/homepage:latest" \
+		--load \
+		.'''
+[tasks.publish_container]
+description = "Publish the docker container to GitHub Container Registry"
+run = '''docker buildx build \
+        -t "ghcr.io/yaleman/homepage:latest" \
+        --platform linux/amd64,linux/arm64 \
+        --publish \
+        .
+        '''
+
+[tasks.run_container]
+depends = ["build_container"]
+run = '''docker run --rm -it \
+    -v $(PWD)/links.json:/links.json \
+    -v $(PWD)/images:/images \
+    --name homepage \
+    -p 8000:8000 \
+    "ghcr.io/yaleman/homepage:latest"
+    '''
