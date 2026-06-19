@@ -27,7 +27,7 @@ homepage = "homepage.__main__:cli"
 
 [dependency-groups]
 dev = [
-    "pytest>=9.0.3",
+    "pytest>=9.1.1",
     "pylint-pydantic>=0.4.1",
     "httpx>=0.28.1",
     "ruff>=0.15.17",
