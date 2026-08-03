@@ -1,17 +1,16 @@
 """homepage thing"""
 
+import sys
 from functools import lru_cache
 from pathlib import Path
-import sys
-from typing import Dict, Annotated, Any, Optional, Union
-from jinja2 import Environment, PackageLoader, select_autoescape
-
+from typing import Annotated, Any
 
 from fastapi import FastAPI, Header
-from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.exceptions import HTTPException
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import FileResponse, Response
 from fastapi.staticfiles import StaticFiles
+from jinja2 import Environment, PackageLoader, select_autoescape
 from loguru import logger
 from prometheus_fastapi_instrumentator import Instrumentator
 
@@ -46,14 +45,14 @@ def get_app() -> FastAPI:
     env = Environment(loader=PackageLoader("homepage"), autoescape=select_autoescape())
 
     @app.get("/images/default.png", response_model=None, include_in_schema=False)
-    async def default_image() -> Union[FileResponse, Response]:
+    async def default_image() -> FileResponse | Response:
         """default image"""
         if DEFAULT_IMAGE_PATH.exists():
             return FileResponse(DEFAULT_IMAGE_PATH)
         return Response(status_code=404)
 
     @app.get("/favicon.ico", response_model=None, include_in_schema=False)
-    async def favicon() -> Union[FileResponse, Response]:
+    async def favicon() -> FileResponse | Response:
         """default image"""
         return FileResponse(STATIC_DIR / "favicon.ico")
 
@@ -69,7 +68,7 @@ def get_app() -> FastAPI:
         return Response(contents, media_type="application/manifest+json")
 
     @app.get("/config")
-    def get_config(host: Annotated[str | None, Header()] = None) -> Dict[str, Any]:
+    def get_config(host: Annotated[str | None, Header()] = None) -> dict[str, Any]:
         """Returns the config file, only accessible from internal hosts"""
         if host in app_config.hosts.internal:
             return safe_serialize(app_config)
@@ -82,8 +81,8 @@ def get_app() -> FastAPI:
         """Healthcheck endpoint"""
         return "OK"
 
-    @lru_cache()
-    def load_config(filepath: Optional[str] = None) -> ConfigFile:
+    @lru_cache
+    def load_config(filepath: str | None = None) -> ConfigFile:
         """loads the config"""
         if filepath is None:
             config = ConfigFile.load_config()
@@ -102,8 +101,8 @@ def get_app() -> FastAPI:
         config.validate_config()
         return config
 
-    @lru_cache()
-    def render_template(filename: str, host: Optional[str]) -> str:
+    @lru_cache
+    def render_template(filename: str, host: str | None) -> str:
         """caching template rendering"""
         template = env.get_template(filename)
         config = load_config()
@@ -120,7 +119,7 @@ def get_app() -> FastAPI:
         return Response(render_template("index.html", host))
 
     @app.get("/schema.json", description="Returns the JSON schema for the config file")
-    async def json_schema() -> Dict[str, Any]:
+    async def json_schema() -> dict[str, Any]:
         """Generates a JSON schema document for the config file"""
         return ConfigFile.model_json_schema()
 

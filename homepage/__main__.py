@@ -1,5 +1,7 @@
 """CLI interface for homepage"""
 
+import sys
+
 import click
 import requests
 from loguru import logger
@@ -46,11 +48,11 @@ def cli(
         try:
             res = requests.get(url, timeout=5)
             res.raise_for_status()
-        except Exception as error:
+        except Exception as error:  # noqa: BLE001
             logger.error("Healthcheck to {} failed: {}", url, error)
-            exit(1)
+            sys.exit(1)
         logger.success("Healthcheck on {} OK", url)
-        exit(0)
+        sys.exit(0)
 
     else:
         run(

@@ -3,7 +3,7 @@
 import os
 from hashlib import sha256
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from loguru import logger
 from pydantic import BaseModel, Field, field_validator, model_validator
@@ -16,11 +16,11 @@ DEFAULT_COLOUR = "white"
 class Link(BaseModel):
     """link object"""
 
-    id: Optional[str] = Field(None)
+    id: str | None = Field(None)
     url: str
     title: str
-    icon: Optional[str] = DEFAULT_ICON
-    colour: Optional[str] = DEFAULT_COLOUR
+    icon: str | None = DEFAULT_ICON
+    colour: str | None = DEFAULT_COLOUR
     internal_only: bool = Field(False)
 
     @model_validator(mode="after")
@@ -31,18 +31,18 @@ class Link(BaseModel):
 
 
 class Hosts(BaseModel):
-    external: List[str] = Field([])
-    internal: List[str] = Field(["localhost"])
+    external: list[str] = Field([])
+    internal: list[str] = Field(["localhost"])
 
     @field_validator("internal")
-    def validate_internal(cls, value: List[str]) -> List[str]:
+    def validate_internal(cls, value: list[str]) -> list[str]:
         # because GitHub actions is a thing
         if os.getenv("CI") is not None:
             return ["localhost"]
         return value
 
 
-def safe_serialize(config: BaseSettings) -> Dict[str, Any]:
+def safe_serialize(config: BaseSettings) -> dict[str, Any]:
     """serialize it without giving away secrets"""
     res = config.model_dump()
     res["hosts"] = Hosts(internal=[], external=[])
@@ -52,9 +52,9 @@ def safe_serialize(config: BaseSettings) -> Dict[str, Any]:
 class ConfigFile(BaseSettings):
     """config file things"""
 
-    favicon: Optional[str] = None
-    links: List[Link]
-    open_in_new_tab: Optional[bool] = False
+    favicon: str | None = None
+    links: list[Link]
+    open_in_new_tab: bool | None = False
     title: str
     hosts: Hosts
     image_dir: Path = Field(default=Path("./images"))
@@ -64,7 +64,7 @@ class ConfigFile(BaseSettings):
 
     @field_validator("favicon")
     @classmethod
-    def validate_favicon(cls, value: Optional[str] = None) -> str:
+    def validate_favicon(cls, value: str | None = None) -> str:
         """validates the favicon setting"""
         if value is None:
             return "/static/favicon.svg"
@@ -97,7 +97,7 @@ class ConfigFile(BaseSettings):
         return value
 
     @classmethod
-    def load_config(cls, filename: Optional[Path] = None) -> "ConfigFile":
+    def load_config(cls, filename: Path | None = None) -> "ConfigFile":
         """load a config file from a filepath"""
         if filename is None:
             filename = Path(os.getenv("HOMEPAGE_CONFIG_FILE", "links.json"))
@@ -106,7 +106,7 @@ class ConfigFile(BaseSettings):
 
         return ConfigFile.model_validate_json(filename.read_text(encoding="utf-8"))
 
-    def get_links(self, host: Optional[str] = None) -> List[Link]:
+    def get_links(self, host: str | None = None) -> list[Link]:
         """returns the links, checks if we're allowed to"""
         if self.hosts.internal:
             # we have specified internal hosts

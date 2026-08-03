@@ -166,7 +166,7 @@ def cli(filename: str = "links.json") -> None:
             ).ask()
             if menu_selected is None:
                 return
-        except Exception:
+        except Exception:  # noqa: BLE001
             return
 
         match menu_selected:
