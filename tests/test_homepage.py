@@ -5,15 +5,16 @@ import socket
 import subprocess
 import sys
 import time
-from typing import Any, Iterator
+from collections.abc import Iterator
+from typing import Any
 
-from fastapi.testclient import TestClient
-from homepage import get_app
-from playwright.sync_api import Page, expect
 import pytest
 import requests
+from fastapi.testclient import TestClient
+from playwright.sync_api import Page, expect
 from starlette.routing import Mount, Route
 
+from homepage import get_app
 from homepage.config import ConfigFile
 
 
@@ -108,7 +109,7 @@ def test_all_routes(monkeypatch: Any) -> None:
             continue
         elif isinstance(route, Route):
             if route.methods is None:
-                raise Exception(f"No methods defined for route {route}")
+                raise Exception(f"No methods defined for route {route}")  # noqa: TRY002
             else:
                 methods = route.methods
             for method in methods:
@@ -116,7 +117,7 @@ def test_all_routes(monkeypatch: Any) -> None:
                     method, route.path, headers={"host": "localhost:8000"}
                 )
         else:
-            raise Exception(f"Unknown route type: {route}")
+            raise Exception(f"Unknown route type: {route}")  # noqa: TRY002, TRY004
 
 
 def test_search_filters_link_cards(
