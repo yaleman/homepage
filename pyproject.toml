@@ -48,3 +48,7 @@ load-plugins = "pylint_pydantic"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+faulthandler_timeout = 5
+faulthandler_exit_on_timeout = true
