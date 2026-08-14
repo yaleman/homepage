@@ -37,7 +37,7 @@ dev = [
     "ty>=0.0.70",
     "coveralls>=4.1.0",
     "coverage>=7.15.4",
-    "pytest-playwright>=0.8.0",
+    "pytest-playwright>=0.9.0",
 ]
 
 [tool.pylint.MASTER]
