@@ -1,5 +1,6 @@
 [tools]
 biome = "latest"
+playwright = "latest"
 python = "3.13"
 uv = "latest"
 
