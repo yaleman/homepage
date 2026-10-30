@@ -35,7 +35,7 @@ dev = [
     "pytest-cov>=7.1.0",
     "ty>=0.0.90",
     "coveralls>=4.1.0",
-    "coverage>=7.16.2",
+    "coverage>=7.17.0",
     "pytest-playwright>=0.10.0",
 ]
 
